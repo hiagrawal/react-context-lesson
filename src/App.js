@@ -80,3 +80,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
+
+//leveraging Context API to handle state management and asynchronous call so excluded all redux thunk and saga code
