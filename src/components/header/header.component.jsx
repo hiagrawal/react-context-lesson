@@ -43,10 +43,14 @@ const Header = () => {
           SIGN IN
         </Link>
       )}
+    {/* In this we have created local state and function to update the state and passing that values to context 
+    so hidden value of context will take the hidden value of local state and toggleHidden of context will get the toggleHidden 
+    of local state */}
     <CartContext.Provider value={{hidden,toggleHidden}}>
       <CartIcon />
     </CartContext.Provider>
     </div>
+    {/* hidden is still getting from the local state because it is in the same component where we are defining the state */}
     {hidden ? null : <CartDropdown />}
   </div>
 )};
