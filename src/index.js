@@ -6,16 +6,20 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import { store, persistor } from './redux/store';
 
+import CartProvider from './providers/cart/cart.provider';
+
 import './index.css';
 import App from './App';
 
 ReactDOM.render(
+<CartProvider>
   <Provider store={store}>
     <BrowserRouter>
       <PersistGate persistor={persistor}>
         <App />
       </PersistGate>
     </BrowserRouter>
-  </Provider>,
+  </Provider>
+</CartProvider>,
   document.getElementById('root')
 );

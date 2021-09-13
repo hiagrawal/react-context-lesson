@@ -12,7 +12,8 @@ import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 import CurrentUserContext from '../../contexts/current-user/current-user.context';
-import CartContext from '../../contexts/cart/cart.context';
+//import CartContext from '../../contexts/cart/cart.context';
+import { CartContext } from '../../providers/cart/cart.provider';
 
 import './header.styles.scss';
 
@@ -20,8 +21,11 @@ import './header.styles.scss';
 //const Header = ({ hidden }) => {
 const Header = () => {
   const currentUser = useContext(CurrentUserContext);
-  const [hidden, setHidden] = useState(true);
-  const toggleHidden = () => setHidden(!hidden);
+  //since now we defined state in provider, we dont need to set it here, WE can consume the same from context
+  // const [hidden, setHidden] = useState(true);
+  // const toggleHidden = () => setHidden(!hidden);
+
+  const {hidden} = useContext(CartContext)
   return(
   <div className='header'>
     <Link className='logo-container' to='/'>
@@ -46,9 +50,11 @@ const Header = () => {
     {/* In this we have created local state and function to update the state and passing that values to context 
     so hidden value of context will take the hidden value of local state and toggleHidden of context will get the toggleHidden 
     of local state */}
-    <CartContext.Provider value={{hidden,toggleHidden}}>
+    {/* <CartContext.Provider value={{hidden,toggleHidden}}> */}
+    {/* since now all child have access to CartContext after creating provider and wrapping entire application in CartProvider, 
+    we dont need to give it here now to access the same in CartIcon and we can access it directly */}
       <CartIcon />
-    </CartContext.Provider>
+    {/* </CartContext.Provider> */}
     </div>
     {/* hidden is still getting from the local state because it is in the same component where we are defining the state */}
     {hidden ? null : <CartDropdown />}
